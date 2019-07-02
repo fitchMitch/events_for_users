@@ -45,9 +45,11 @@ gem 'font-awesome-sass',                      '~> 5.6.1'
 gem 'simple_form',                            '~> 4.1.0'
 
 
+group :development do
+  gem 'web-console',                        '>= 3.3.0'
+end
 
 group :development, :test do
-  gem 'web-console', '>= 3.3.0'
   gem 'rubocop',                            '~> 0.56.0', require: false
   gem 'binding_of_caller',                  '~> 0.8.0'
   gem 'pry-byebug',                         '~> 3.6.0'
