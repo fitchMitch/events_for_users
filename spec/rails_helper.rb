@@ -27,7 +27,6 @@ Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
 
 # https://www.devmynd.com/blog/setting-up-rspec-and-capybara-in-rails-5-for-testing/
 require 'rspec/rails'
-require 'webmock/rspec'
 require 'capybara/rspec'
 require 'selenium/webdriver'
 
@@ -38,8 +37,6 @@ rescue ActiveRecord::PendingMigrationError => e
   puts e.to_s.strip
   exit 1
 end
-
-WebMock.disable_net_connect!(allow_localhost: true)
 
 begin
   ActiveRecord::Migration.maintain_test_schema!
@@ -101,12 +98,6 @@ Capybara.javascript_driver = :headless_chrome
 # end
 
   config.use_transactional_fixtures = true
-
-  config.include Devise::Test::IntegrationHelpers, type: :system
-  #TODO withdraw next line
-  # config.include Devise::Test::IntegrationHelpers, type: :feature
-  config.include Devise::Test::ControllerHelpers, type: :controller
-  config.include Devise::Test::ControllerHelpers, type: :view
 
   # FactoryBot config
   config.include FactoryBot::Syntax::Methods
