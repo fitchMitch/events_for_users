@@ -1,11 +1,11 @@
 class AddEventsAndUsers < ActiveRecord::Migration[5.2]
   def change
     create_table :events do |t|
-      t.string :title
-      t.string :description
+      t.string :title, null: false
+      t.string :description, null: true
       t.string :location, index: true
-      t.datetime :start_time
-      t.integer :sec_duration
+      t.datetime :start_time, null: false, default: Time.zone.now
+      t.integer :sec_duration, default: 0
       t.timestamps
     end
 
