@@ -88,7 +88,7 @@ RSpec.describe Event, type: :model do
 
     # private
 
-    describe '#begin_set_before_after?' do
+    describe '#start_is_set_before_end?' do
       context 'when start_time is blanck' do
         let(:event) do
           create(
@@ -97,7 +97,7 @@ RSpec.describe Event, type: :model do
             end_time: 2.hours.ago
           )
         end
-        it { expect{event.begin_set_before_after?}.to raise_error(ActiveRecord::NotNullViolation)  }
+        it { expect{event.start_is_set_before_end?}.to raise_error(ActiveRecord::NotNullViolation)  }
       end
       context 'when end_time is blanck' do
         let(:event) do
@@ -107,18 +107,18 @@ RSpec.describe Event, type: :model do
             start_time: 2.hours.ago
           )
         end
-        it { expect{event.begin_set_before_after?}.to raise_error(ActiveRecord::NotNullViolation)  }
+        it { expect{event.start_is_set_before_end?}.to raise_error(ActiveRecord::NotNullViolation)  }
       end
       context 'when start_time is set before end_time' do
         let(:event) { build(:event, start_time: Time.zone.now, end_time: 1.day.ago) }
         let(:error_message) do
           { end_time: ["Your meeting have to finish after its beginning"] }
         end
-        it { expect(event.send(:begin_set_before_after?)).to eq(error_message[:end_time]) }
+        it { expect(event.send(:start_is_set_before_end?)).to eq(error_message[:end_time]) }
       end
       context 'when start_time is set before end_time' do
         let(:event) { create(:event, start_time: 1.day.ago, end_time: Time.zone.now) }
-        it { expect(event.send(:begin_set_before_after?)).to be(nil)  }
+        it { expect(event.send(:start_is_set_before_end?)).to be(nil)  }
       end
     end
   end

@@ -26,7 +26,7 @@ class Event < ApplicationRecord
               maximum: 120
             }
 
-  validate :begin_set_before_after?, on: [:create, :update]
+  validate :start_is_set_before_end?, on: [:create, :update]
 
   default_scope { order('events.start_time desc') }
 
@@ -56,7 +56,7 @@ class Event < ApplicationRecord
 
   private
 
-  def begin_set_before_after?
+  def start_is_set_before_end?
     return if start_time.blank? || end_time.blank?
     errors.add(
       :end_time,
