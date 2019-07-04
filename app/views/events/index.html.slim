@@ -1,0 +1,8 @@
+.container
+  h1 Events
+  hr
+  = render partial: 'event_search'
+  hr
+  h2 Events list
+  = render partial: 'event_list_header'
+  = render partial: 'event', collection: @events

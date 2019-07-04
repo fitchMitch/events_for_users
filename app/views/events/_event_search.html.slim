@@ -1,0 +1,10 @@
+= simple_form_for :search,
+                  url: events_path,
+                  method: "GET",
+                  html: { class: 'form-inline', id: 'search_form' } do |f|
+  = f.input :location,
+            input_html: {value: "", class:'space-right', id: 'search_location' }
+  = f.input :title_or_description,
+            input_html: {value: "", id: 'search_title_or_description'}
+  = f.submit "Search",
+             class: "btn btn-primary"

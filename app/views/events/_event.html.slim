@@ -1,0 +1,13 @@
+.row.event-desc
+  .col-sm
+    = event.title
+  .col-sm
+    = event.description
+  .col-sm
+    = event.location
+  .col-sm
+    = l event.start_time, format: '%b %d, %Y'
+  .col-sm
+    = l event.end_time, format: '%b %d, %Y'
+  .col-sm
+    = event.user_count
