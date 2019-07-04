@@ -26,14 +26,14 @@ RSpec.describe Event, type: :model do
     }
   end
 
-  describe '.search_location' do
+  describe '.search_by_location' do
     let!(:event) { create(:event, location:'19 rue du Louvre,75603 Paris') }
     context 'when at least a location is found' do
-      it { expect(described_class.search_location('Louvre')).to eq [event] }
-      it { expect(described_class.search_location('Lou')).to eq [event] }
-      it { expect(described_class.search_location('louvre')).to eq [event] }
-      it { expect(described_class.search_location('Loua')).to eq [] }
-      it { expect(described_class.search_location('Louvres')).to eq [] }
+      it { expect(described_class.search_by_location('Louvre')).to eq [event] }
+      it { expect(described_class.search_by_location('Lou')).to eq [event] }
+      it { expect(described_class.search_by_location('louvre')).to eq [event] }
+      it { expect(described_class.search_by_location('Loua')).to eq [] }
+      it { expect(described_class.search_by_location('Louvres')).to eq [] }
     end
   end
 

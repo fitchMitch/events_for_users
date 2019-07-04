@@ -1,6 +1,13 @@
 class Event < ApplicationRecord
   has_and_belongs_to_many :users
 
+  ALLOWED_SEARCH_KEYS = %w[
+    title_or_description
+    location
+    start_date
+    end_date
+  ]
+
   # Validations
   validates :title,
             presence: true,
@@ -21,16 +28,15 @@ class Event < ApplicationRecord
 
   validate :begin_set_before_after?, on: [:create, :update]
 
-  default_scope { order('events.start_time asc') }
+  default_scope { order('events.start_time desc') }
 
   scope :list, -> {
-      distinct
-      .left_outer_joins(:events_users)
-      .select("events.*, count(events_users.*) AS user_count")
-      .group('events.id')
+    distinct.left_outer_joins(:events_users)
+            .select("events.*, count(events_users.*) AS user_count")
+            .group('events.id')
   }
 
-  scope :search_location, ->(q_location) { where(
+  scope :search_by_location, ->(q_location) { where(
     "LOWER(location) like ?",
     "%#{q_location.downcase}%"
     )
