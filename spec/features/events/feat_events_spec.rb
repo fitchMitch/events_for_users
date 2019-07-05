@@ -42,9 +42,9 @@ RSpec.feature 'Event' do
 
     feature 'filtering by title_or_description' do
       before :each do
-        create(:event, title:'zzz', description: 'aaaaa')
-        create(:event, title:'eee', description: 'bbbb')
-        create(:event, title:'bbb', description: 'cccc')
+        create(:event, title: 'zzz', description: 'aaaaa')
+        create(:event, title: 'eee', description: 'bbbb')
+        create(:event, title: 'bbb', description: 'cccc')
       end
       feature 'with no input' do
         background do
@@ -55,7 +55,6 @@ RSpec.feature 'Event' do
       end
       feature 'with  input description targeted search' do
         background do
-
           visit events_path
           within '#search_form' do
             fill_in 'search[title_or_description]', with: 'aa'
